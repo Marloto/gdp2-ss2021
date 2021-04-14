@@ -1,7 +1,7 @@
 
 public class Position {
     
-    private double x; // dürfen von -100 bis 100 gehen
+    private double x;
     private double y;
     
     public Position(double x, double y) {
@@ -50,13 +50,13 @@ public class Position {
     // Spezieller mit Rückgabe der Klassen-Instanz zum verketteten Aufruf von
     // Settern:
     // public Position setX(double x) {
-    //     this.x = x; // dafür sorgen, dass im Wertebereich bleibt
+    //     this.x = x; // z.B. dafür sorgen, dass im Wertebereich bleibt
     //     return this;
     // }
     // -> erlaubt sowas wie new Position(1, 2).setX(10).setY(5).setX(42).setY(13);
     
     public void setX(double x) {
-        this.x = x; // dafür sorgen, dass im Wertebereich bleibt
+        this.x = x; // Transformieren oder Wertebereichsprüfungen möglich
     }
     
     public void setY(double y) {
