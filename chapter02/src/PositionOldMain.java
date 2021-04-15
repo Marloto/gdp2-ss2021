@@ -1,15 +1,15 @@
 
-public class PositionMain {
+public class PositionOldMain {
     public static void main(String[] args) {
 
-        Position p1 = new Position(10, 5);
-        System.out.println(Position.aktuellerZaehler()); // Statischer Zähler auf 1
+        PositionOld p1 = new PositionOld(10, 5);
+        System.out.println(PositionOld.aktuellerZaehler()); // Statischer Zähler auf 1
         
-        Position p2 = new Position(10, 5);
-        System.out.println(Position.aktuellerZaehler()); // Statischer Zähler auf 2
+        PositionOld p2 = new PositionOld(10, 5);
+        System.out.println(PositionOld.aktuellerZaehler()); // Statischer Zähler auf 2
         
-        Position p3 = p1;
-        System.out.println(Position.aktuellerZaehler()); // Statischer Zähler bleibt auf 2
+        PositionOld p3 = p1;
+        System.out.println(PositionOld.aktuellerZaehler()); // Statischer Zähler bleibt auf 2
         
         System.out.println(p1);
         

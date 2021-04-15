@@ -1,100 +1,182 @@
+// package <name1>.<name2>.<name3>. ...
+//  -> name1/name2/name3/
 
+
+// beispiel.Position => Full Qualified Class Name
 public class Position {
-    
+
     private double x;
     private double y;
-    
+
     public Position(double x, double y) {
         this.x = x;
         this.y = y;
-        
-        zaehler ++;
     }
-    
-    // (1) Sichtbarkeiten (public, private)
-    // -> 4 Stufen der Sichtbarkeit in Java
-    // -> public -> alles ist öffentlich, für jeden der die Klasse nutzt
-    // -> protected (machen wir in Kapitel 3)
-    // -> kein Schlüsselwort bedeutet "package internal"
-    // -> private 
-    // "Wer könnten Nutzer sein"
-    // -> Nutzung aus Perspektive der Klasse Position
-    // -> Nutzung aus Perspektive der Klasse PositionMain
-    // -> Über Projektgrenzen hinweg
-    // -> Über Paketgrenzen hinweg
-    
-    
-    // (2) Getter und Setter
-    // -> Attribute besser geheim halten
-    // -> Lesen und Schreiben über Getter und Setter
-    // -> Standard-Struktur in Java
-    // private <Datentyp> <name>
-    // Typische Getter in Java
-    // <Sichtbarkeit> <Rückgabe-Datentyp> get<Name>() { // ohne Parameter!
-    //     return this.<name>;
-    // }
-    
-    // Typische Setter in Java
-    // <Sichtbarkeit> void set<Name>(<Datentyp> <name>) {
-    //     this.<name> = var;
-    // }
-    
+
+    // (2) Getter
     public double getX() {
         return this.x;
     }
-    
+
     public double getY() {
         return this.y;
     }
 
-    // Spezieller mit Rückgabe der Klassen-Instanz zum verketteten Aufruf von
-    // Settern:
-    // public Position setX(double x) {
-    //     this.x = x; // z.B. dafür sorgen, dass im Wertebereich bleibt
-    //     return this;
-    // }
-    // -> erlaubt sowas wie new Position(1, 2).setX(10).setY(5).setX(42).setY(13);
-    
-    public void setX(double x) {
-        this.x = x; // Transformieren oder Wertebereichsprüfungen möglich
-    }
-    
-    public void setY(double y) {
-        this.y = y;
-    }
-
     // (3) toString
-    // Standardmethode toString zur Beschreibung der Repräsentation als 
-    // eines Objektes als String
     public String toString() {
         return this.x + " / " + this.y;
     }
-    
+
     // (4) Überprüfung auf Gleichheit
-    // Standardmethode equals kann genutzt werden, um zu beschrieben, wie 
-    // zwei Instanzen / Objekte der Klasse verglichen werden
     public boolean equals(Object o) {
-        // int a = (int) 1.2345; // <- cast von double zu int
         Position p = (Position) o; // <- cast von Object zu Position, vgl. Kapitel 3
-        
+
         return this.getX() == p.getX() && this.getY() == p.getY();
+    }
+
+    // add, sub, mul und div
+    // ...
+
+    // dot
+    // ...
+
+    // distance
+    // ...
+
+//    public Position add(int x, int y) {
+//        this.x += x;
+//        this.y += y;
+//
+//        return this;
+//    }
+    
+    // public Position add(int x, int y) {
+      public Position add(Position p) {
+          return new Position(p.getX() + this.x, p.getY() + this.y);
+      }
+//      public Position add(Position p) {
+//          Position p1 = new Position(0, 0);
+//          p1.x = this.x + p.x;
+//          p1.y = this.y + p.y;
+//          return p1;
+//      }
+    
+    // new Position(10, 5).add(1, 1).add(2, 3)
+    // -> 
+
+//    public Position sub(int x, int y) {
+//        this.x -= x;
+//        this.y -= y;
+//
+//        return this;
+//    }
+//
+//    public Position mul(int f) {
+//        this.x *= f;
+//        this.y *= f;
+//
+//        return this;
+//    }
+//
+//    public Position div(int f) {
+//        this.x /= f;
+//        this.y /= f;
+//
+//        return this;
+//    }
+
+    public double dot(Position p) {
+        return (this.x * p.x) + (this.y * p.y);
+    } // <- Hier schauen, Frage, was wäre:
+    // Position p = new Position(10, 10);
+    // p.dot(p);
+    // -> 10 * 10 + 10 * 10
+    // -> 10^2 + 10^2
+
+    public double distance(Position p) {
+        // Frage: Alternative mit Methoden der Klasse, ohne hier zu rechnen
+        // -> sub mul, usw.
         
-        // Alternativ sieht es so aus:
-        // if(this.getX() == p.getX() && this.getY() == p.getY()) {
-        //     return true;
-        // }
-        // return false;
+        // Wurzel(x^2 + y^2)
+        //return Math.sqrt((this.x - p.x) * (this.x - p.x) + (this.y - p.y) * (this.y - p.y));
+        
+        Position result = this.sub(p);
+        return Math.sqrt(result.dot(this.sub(p)));
+    }
+
+//    public Position add(Position p) {
+//
+//        Position padd = new Position(p.getX() + this.x, p.getY() + this.y);
+//
+//        return padd;
+//
+//    }
+//
+    public Position sub(Position p) {
+
+        Position psub = new Position(this.x - p.getX(), this.y - p.getY());
+
+        return psub;
+
+    }
+
+    public Position mul(double f) {
+
+        Position pmul = new Position(this.x * f, this.y * f);
+
+        return pmul;
+
+    }
+
+    public Position div(double f) {
+
+        Position pdiv = new Position(this.x / f, this.y / f);
+
+        return pdiv;
+
+    }
+//
+//    public double dot(Position p) {
+//
+//        return (this.x * p.getX() + this.y * p.getY());
+//
+//    }
+//
+//    public double distance(Position p) {
+//
+//        return Math.sqrt((this.x - p.getX()) * (this.x - p.getX()) + (this.y - p.getY()) * (this.y - p.getY()));
+//
+//    }
+
+    public static Position center(Position[] posArr) {
+        Position neu = new Position(0, 0);
+        for(int i = 0; i < posArr.length; i++) {
+            neu = neu.add(posArr[i]);
+        }
+        Position ergebnis = neu.div(posArr.length);
+        return ergebnis;
     }
     
-    // (5) Statische Elemente (static)
-    // Erlaubt Attribute und Methoden die ohne Instanzen genutzt werden können
-    // Zugriff über eine Instanz bedeutet damit, dass alle Instanzen auf das 
-    // selbe Attribut zugreifen, bzw. die Methode ohne this-Bezug ausführen
-    
-    private static int zaehler = 0;
-    
-    public static int aktuellerZaehler() {
-        return zaehler;
+    public static void main(String[] args) {
+        // https://pastie.io/huidgb.java
+
+        Position p1 = new Position(10, 10);
+        Position p2 = new Position(12, 18);
+        Position p3 = new Position(17, 16);
+        Position p4 = new Position(14, 8);
+        Position p5 = new Position(12, 7);
+        
+        // Wie könnte ein Positions-Array (für p1, ..., p5) aussehen?
+        Position[] posArr = new Position[] { p1, p2, p3, p4, p5 };
+        // posArr[0] = p1;
+        
+        // Frage: wie können wir unter Verwendung der Methoden oben das Zentrum, bzw. den
+        // Schwerpunkt ermitteln?
+        // -> Summe alle Positionen, anschließend durch die Anzahl der Punkte teilen
+        
+        Position ergebnis = center(posArr);
+        System.out.println(ergebnis);
+        
+        // -> Versuch des Umfangs
     }
-    
 }
