@@ -13,13 +13,23 @@ class Person {
     }
 }
 
-class Dozent extends Person {
-    // Default Konstruktor ist möglich
-    public Dozent() {
-        super(); // Schlüsselwort für morgen!
-        // automatisch den Default-Konstruktor von Person aufruft...
-        System.out.println("Dozent wird erzeugt!");
+class ZwischenKlasse extends Person {
+    public ZwischenKlasse() {
+        super();
     }
+    public ZwischenKlasse(String name) {
+        super(name);
+    }
+    
+}
+
+class Dozent extends ZwischenKlasse {
+    // Default Konstruktor ist möglich
+//    public Dozent() {
+////        super(); // Schlüsselwort für morgen!
+//        // automatisch den Default-Konstruktor von Person aufruft...
+//        System.out.println("Dozent wird erzeugt!");
+//    }
 }
 
 public class PersonDozentBeispiel {
