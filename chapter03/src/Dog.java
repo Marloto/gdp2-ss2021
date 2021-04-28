@@ -1,8 +1,5 @@
-
 public class Dog extends Animal {
     private String breed;
-    
-    protected int example;
     
     public Dog(String name, int age, String breed) {
         super(name, age);
@@ -23,6 +20,23 @@ public class Dog extends Animal {
         return false;
     }
     
+    public void makeSound() {
+        System.out.println("Wuff!");
+    }
     
-    
+    public int humanAge() {
+        int age = getAge();
+        int humanAge = 0;
+        
+        if(age == 1) {
+            humanAge = 14;
+        } else if(age == 2) {
+            humanAge = 22;
+        } else if(age > 2) {
+            humanAge = 22 + (age - 2) * 5;
+        }
+        
+        return humanAge;
+    }
+
 }

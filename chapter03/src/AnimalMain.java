@@ -4,6 +4,14 @@ public class AnimalMain {
         final Dog dog = new Dog("Zoe", 2, "Mischling");
         Cat cat = new Cat("Paul", 5);
         
+        //Animal animal = new Animal("Test", 1); geht nicht, weil abstrakt!
+        
+        Animal animal = dog; // durch Vererbung möglich!
+        //int age = animal.humanAge();
+        
+        // Statische Methoden lassen sich trotz abstract Keyword nutzen
+        Animal.doSomethingStatic();
+        
         //dog = new Dog("Zoe", 2, "Mischling");
         
         // System.out.println(dog.equals(new Cat("Zoe", 2)));

@@ -1,6 +1,7 @@
 
-// Superklasse... auch wenn wir das nicht wollen!
-public class Animal extends Object {
+// Superklasse Object... auch wenn wir das nicht wollen!
+// Abstrakte Klassen sind nicht instanzierbar!
+public abstract class Animal extends Object {
     // eine Dog Klasse
     // und eine Cat Klasse ...
     // Erben die Cat und Dog Klassen von Animal
@@ -40,7 +41,25 @@ public class Animal extends Object {
         return age;
     }
     
-    public static void main(String[] args) {
+    // -----
+    // Aufgabe: Ergänzen Sie eine einfache
+    // abstrakte Methoden void makeSound()
+    // und implementieren Sie diese in Cat
+    // und Dog. (ca. 5 Minuten)
+    // -----
+    // Frage: was für Sichtbarkeiten sind möglich?
+    public abstract void makeSound();
+    
+    
+    // Abstrakte Methoden sind noch nicht voll
+    // implementiert, Methodenkörper fehlt!
+    public abstract int humanAge();
+    
+    // Mehr Methoden gehen auch:
+    // public abstract void doSomething();
+    // public abstract void doOtherthing();
+    
+    public static void doSomethingStatic() {
         
     }
 }
