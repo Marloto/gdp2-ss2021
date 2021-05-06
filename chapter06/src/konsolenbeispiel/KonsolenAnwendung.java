@@ -74,6 +74,12 @@ public class KonsolenAnwendung {
      * - Orientieren Sie sich an der Implementierung vom Comparable in Person
      * - Erweiteren Sie ggf. die Klasse Person um notwendige Getter
      */
+    
+    /**
+     * Aufgabe (5): Ändern Sie Person auf die Verwendung von Comparable mit
+     * einem konkreten Datentyp, in unserem Fall Person!
+     * (ca. 5 Minuten)
+     */
 
     public static void main(String[] args) {
         Person person1 = new Person();
@@ -94,7 +100,7 @@ public class KonsolenAnwendung {
         
         // Interface Comparable
         // Führt eine Inplace-Sortierung durch
-        Arrays.sort(liste, new NachEmailSortieren());
+        Arrays.sort(liste);
         
         for(Person p : liste) {
             controller.ausgeben(p);

@@ -1,7 +1,7 @@
 package konsolenbeispiel;
 
 // Wie implementiert man die Schnittstelle DatenEinlesen?
-public class Person implements DatenEinlesen, DatenAusgeben, Comparable {
+public class Person implements DatenEinlesen, DatenAusgeben, Comparable<Person> {
 
     private String name;
     private String email;
@@ -17,9 +17,8 @@ public class Person implements DatenEinlesen, DatenAusgeben, Comparable {
         return email;
     }
     
-    // Immer eine Zeichenkette zurückgeben, solange noch
-    // was eingelesen werden soll...
-    // Wenn nichts einzulesen, dann null!
+    // Methoden-Definition: Immer eine Zeichenkette zurückgeben, solange noch
+    // was eingelesen werden soll... Wenn nichts einzulesen, dann null!
     public String wasFehltNoch() {
         if(name == null || name.isBlank()) {
             return "Name";
@@ -46,18 +45,16 @@ public class Person implements DatenEinlesen, DatenAusgeben, Comparable {
         return liste;
     }
 
-    public int compareTo(Object o) {
+    public int compareTo(Person p) {
         // Referentiell prüfen... 
-        if(this == o) {
+        if(this == p) {
             return 0;
         }
         
         // was wenn o == null
-        if(o == null) {
+        if(p == null) {
             return 1;
         }
-        
-        Person p = (Person) o; // instance of ggf. möglich
         
         // - this == p => 0
         //   -> equals == true
