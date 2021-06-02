@@ -46,7 +46,9 @@ public class Poly {
         
         
         // Dynamische Polymorphie
-        DoSomething dos = someUnknownProcessToCreateAnObject();
+        DoSomething dos;
+        
+        dos = someUnknownProcessToCreateAnObject();
         dos.doIt();
     }
 }
