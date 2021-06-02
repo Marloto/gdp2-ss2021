@@ -2,6 +2,7 @@ package first;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -28,8 +29,6 @@ public class HelloWorldMitJavaFX extends Application {
         label.setOnMouseClicked(value);
         
         pane.getChildren().add(label); // fügen wir Control zu Layout hinzu
-        
-        
 
         // Erstellen einer Szene
         Scene scene = new Scene(pane, 300, 200);
