@@ -1,4 +1,5 @@
 package timestamp;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -20,74 +21,94 @@ public class Main {
     }
 
     public static void handleList(List<String> messages) {
-        // Frage: wie bisher über alle Einträge der Liste?
-        // -> foreach
-//        for(String str : messages) {
-//            System.out.println(str);
-//        }
-//        for(int i = 0; i < messages.size(); i ++) {
-//            
-//        }
+        // Frage: Wie haben wir bisher über alle Einträge einer Liste iteriert?
+        // -> foreach oder for mit Zähler
+        // -> Beispiel
+        // for (String str : messages) {
+        //     System.out.println(str);
+        // }
+        // for (int i = 0; i < messages.size(); i++) {
+        //     System.out.println(str);
+        // }
         
+        //--------
         
-//        Stream<String> stream = messages.stream();
-        // Schritt 1 (jetzt mit Sinn :)): Transformation von String mittels
-        //   split in String[]
-        //   "abc:1234".split(":"); // Ergebnis war String[] -> new String[2]
-        //   forEach, filter, map? -> forEach nur, wenn damit das "Ende",
-        //     für eine spätere Weiterverarbeitung "map"
-
+        // Alternative: Streams, jeder Eintrag wird als ein "Ereignis" durch
+        // eine Kette an Intermediate-Operations verarbeitet und durch eine
+        // Terminal-Operation verbraucht
         
-//        Stream<String[]> splitResult = stream.map(str -> str.split(":"));
-        // Schritt 2: erzeugen Sie mit dem String-Array eine Message
+        // Einfaches Ausgaben mit Streams:
+        // messages.stream().forEach(msg -> System.out.println(msg));
+        
+        // Beispiel mit Filter:
+        // messages.stream()
+        //    .filter(t -> t.contains("1851"))
+        //    .forEach(msg -> System.out.println(msg));
+        
+        // Beispiel mit Map:
+        // messages.stream()
+        //    .map(t -> t.substr(0, 7))
+        //    .forEach(msg -> System.out.println(msg));
+        
+        //--------
+        
+        // Ziel der Aufgabe: String-Liste verarbeiten und Message-Objekte erzeugen
+        // dabei den TimeStamp umwandeln in ein Datum und das Ergebnis filtern
+        // Schritt 0: Ergebnis ausgeben mit Terminal-Operation
+        // Schritt 1: Transformation von String mittels split in String[]
+        // Schritt 2: Erzeugen Sie mit dem String-Array eine Message
         //   -> Long.valueOf
         //   -> Konstruktor im Lambda-Ausdruck verwenden...
-
-//        Stream<Message> messageResult = splitResult.map(strArr -> new Message(Long.valueOf(strArr[0]), strArr[1]));
-//        splitResult.map(strArr -> {
-//            String[] splitRes = strArr;
-//            // Long.valueOf vom ersten String-Element
-//            Long timeStamp = Long.valueOf(splitRes[0]);
-//            
-//            // Konstruktion von Message
-//            Message message = new Message(timeStamp, splitRes[1]);
-//            
-//            // Return
-//            return message;
-//        });
-//        messageResult.forEach(msg -> System.out.println(msg));
+        // Schritt 3: Merken Sie sich das letzte Element mit peak vor dem forEach
+        // Schritt 4: Filtern Sie so, dass keine "alten" Nachrichten angezeigt werden
         
         messages.stream()
             .map(str -> str.split(":"))
             .map(strArr -> new Message(Long.valueOf(strArr[0]), strArr[1]))
+            .filter(msgObj -> last == null || msgObj.getTime() > last.getTime())
+            .peek(msgObj -> last = msgObj)
             .forEach(msg -> System.out.println(msg));
         
-//        Stream<String> stream = messages.stream();
-//        Stream<String> filter = stream.filter(str -> str.startsWith("1581"));
-////        Stream<String> filter = stream.filter(new Predicate<String>() {
-////            public boolean test(String t) {
-////                return t.contains("1851");
-////            }
-////        }); 
-//        // Aufgabe: einfaches Predicate
-//        // welches z.B. einen Teil-String sicherstellt, wie "1581"
-//        // -> contains, indexOf
-//        
-//        
-//        Stream<Integer> map = filter.map((str) -> Integer.valueOf(str));
-//        map.forEach(con -> System.out.println(con));
-//        
-//        messages.stream()
-//            .filter(null)
-//            .map((str) -> Integer.valueOf(str))
-//            .forEach(con -> System.out.println(con));
-
-//        stream.forEach(new Consumer<String>() {
-//            public void accept(String str) {
-//                System.out.println(str);
+        // Aufgabe: Formulieren Sie die Datenstromverarbeitung mit herkömmlicher Algorithmik, also ohne 
+        // Streams und ohne Lambdas (ca. 5 Minuten).
+        
+//        List<Message> msgList = new ArrayList<>();
+//        for(String msg : messages){
+//            String[] strArr = msg.split(":");
+//            msgList.add(new Message(Long.valueOf(strArr[0]), strArr[1]));
+//        }
+//        for (Message message : msgList) {
+//            if(last == null || message.getTime() > last.getTime()) {
+//                System.out.println(message);
 //            }
-//        });
-//        stream.forEach(con -> System.out.println(con));
+//            last = message;
+//        }
+        
+        for (String str : messages) {
+            String[] strArr = str.split(":");
+            Message msg = new Message(Long.valueOf(strArr[0]), strArr[1]);
+            if (last == null || msg.getTime() > last.getTime()) {
+                last = msg;
+                System.out.println(msg);
+            }
+        }
+        
+        Message last = null;
+        for (String string : messages) {
+            String[] strArr = string.split(":");
+            Message msg = new Message(Long.valueOf(strArr[0]), strArr[1]);
+            
+            if (last == null) { // Vorsicht, je nach Aufgabe: was wenn last == null? 
+                // hier richtig, falls keine Ausgabe bei last == null
+                last = msg;
+                System.out.println(msg);
+            } else {
+                if (msg.getTime() > last.getTime()) {
+                    last = msg;
+                    System.out.println(msg);
+                }
+            }
+        }
     }
 
 }

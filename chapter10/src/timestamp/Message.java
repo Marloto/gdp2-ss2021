@@ -25,10 +25,11 @@ public class Message {
     }
 
     public String toFormattedTime() {
-        return null;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY hh:mm:ss");
+        return sdf.format(new Date(time));
     }
 
     public String toString() {
-        return message;
+        return this.toFormattedTime() + " " + this.message;
     }
 }
