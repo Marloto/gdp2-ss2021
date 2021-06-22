@@ -1,8 +1,5 @@
 package de.thi.informatik.gdp2.simplewebserverkotlin.model
 
-import org.springframework.stereotype.Component
-
-@Component
 class Rooms {
     private val map: MutableMap<String, Room> = HashMap<String, Room>()
 
