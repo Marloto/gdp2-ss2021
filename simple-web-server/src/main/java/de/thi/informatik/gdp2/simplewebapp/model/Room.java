@@ -22,6 +22,10 @@ public class Room {
 	}
 	
 	public List<Message> getMessagesSince(long time) {
-		return this.list.stream().filter(msg -> msg.getTime() >= time).collect(Collectors.toList());
+	    // Filtert alle Messages ab einem bestimmten Zeitpunkt und 
+	    // liefert diese dann in einer liste zurück
+		return this.list.stream()
+		        .filter(msg -> msg.getTime() >= time)
+		        .collect(Collectors.toList());
 	}
 }

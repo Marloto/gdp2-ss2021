@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	 Dependency/Build Management Werkzeug; 
+	 Wichtig: Identifikation von Projekten
+	 -> groupId:artifactId:version[:artifactType = default jar] 
+	 Weiter: Definieren von notwendigen Abhängigkeiten
+	 Eclipse / IntelliJ: laden Abhängigkeiten dann automatisch
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -8,14 +16,18 @@
 		<version>2.5.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	
 	<groupId>de.thi.informatik.gdp2</groupId>
 	<artifactId>simple-web-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
 	<name>simple-web-server</name>
 	<description>Demo project for Spring Boot</description>
+	
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
