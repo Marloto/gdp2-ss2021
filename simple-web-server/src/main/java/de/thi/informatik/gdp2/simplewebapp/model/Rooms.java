@@ -6,7 +6,9 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@Component // Markiert diese Klasse als eine "Komponente" in Spring, dadurch
+           // kann die Klasse über Dependency Injection an anderer Stelle genutzt
+           // werden
 public class Rooms {
 	private Map<String, Room> map;
 
