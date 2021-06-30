@@ -62,12 +62,13 @@ public class Main {
         // Schritt 3: Merken Sie sich das letzte Element mit peak vor dem forEach
         // Schritt 4: Filtern Sie so, dass keine "alten" Nachrichten angezeigt werden
         
-        messages.stream()
-            .map(str -> str.split(":"))
-            .map(strArr -> new Message(Long.valueOf(strArr[0]), strArr[1]))
-            .filter(msgObj -> last == null || msgObj.getTime() > last.getTime())
-            .peek(msgObj -> last = msgObj)
-            .forEach(msg -> System.out.println(msg));
+        messages.stream() // -> Ergibt sich aus der ArrayList<String> -> Startet mit String
+            .map(str -> str.split(":")) // -> String ist Input, String[] Output
+            .map(strArr -> new Message(Long.valueOf(strArr[0]), strArr[1])) // -> String[] ist Input
+                                                                            //    Message-Objekt ist Output
+            .filter(msgObj -> last == null || msgObj.getTime() > last.getTime()) // Message Input, Message Output (aus Stream), Rückgabedatentyp ist boolean
+            .peek(msgObj -> last = msgObj) // Message Input, Message Output, Rückgabedatentyp ist void
+            .forEach(msg -> System.out.println(msg)); // Message Input, Rückgabedatentyp ist void
         
         // Aufgabe: Formulieren Sie die Datenstromverarbeitung mit herkömmlicher Algorithmik, also ohne 
         // Streams und ohne Lambdas (ca. 5 Minuten).
