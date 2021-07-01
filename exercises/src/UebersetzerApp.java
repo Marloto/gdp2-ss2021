@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -25,14 +26,18 @@ class Translator {
     * @param text zu übersetzender Text
     * @return text in Zielsprache
     */
-    public String translateSentence(String sourceLanguage, String targetLanguage,
-    String text) { return text + "x"; }
+    public String translateSentence(String sourceLanguage, 
+            String targetLanguage,
+            String text) { 
+        return text + "x"; 
+    }
 }
 
 
 public class UebersetzerApp extends Application {
     /**
-    * Liefert die Sprachenliste ohne die Ausgangssprache als ObservableList * @param allLanguages Liste mit allen Sprachen
+    * Liefert die Sprachenliste ohne die Ausgangssprache als ObservableList 
+    * @param allLanguages Liste mit allen Sprachen
     * @param sourceLanguage gewählte Ausgangssprache
     * @return Sprachliste
     */
@@ -71,12 +76,37 @@ public class UebersetzerApp extends Application {
         from.setItems(sprachen);
         from.getSelectionModel().select(0);
         to.setItems(getTargetLanguages(allLanguages, sprachen.get(0)));
+        to.getSelectionModel().select(0);
         
         /* To-ChoiceBox modifizieren wenn From-ChoiceBox geändert wird */
         
+        // Frage: Wie Ereignisse von JavaFX Controls abfangen?
+        // -> Wie haben Sie Ereignisse im Praktikum auf den Buttons verarbeitet?
+        // -> setOnMouseClick -> EventHandler<MouseEvent>
+        // -> **setOnAction** -> EventHandler<ActionEvent>
+        from.setOnAction(action -> {
+            // hier beschreiben was passiert...
+            // - to ChoiceBox neu befüllen
+            // -> to.setItems(getTargetLanguages(allLanguages, ???))
+            String fromLanguage = from.getSelectionModel().getSelectedItem();
+            to.setItems(getTargetLanguages(allLanguages, fromLanguage));
+            //to.getSelectionModel().select(0);
+        });
+
         /* Übersetzen bei Klick von Button */
-        
-        
+        translate.setOnAction(action -> {
+            // Frage: was muss passieren?
+            // -> translateSentence aufrufen
+            //    -> text aus input 
+            //    -> Sprachen aus den ChoiceBoxen
+            String fromLanguage = from.getSelectionModel().getSelectedItem();
+            String toLanguage = to.getSelectionModel().getSelectedItem();
+            String text = input.getText();
+            Translator translator = new Translator();
+            String result = translator.translateSentence(fromLanguage, toLanguage, text);
+            output.setText(result);
+        });
+
         Scene scene = new Scene(vbox);
         
         stage.setScene(scene);
